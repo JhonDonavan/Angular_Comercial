@@ -1,0 +1,97 @@
+<p-panel header="Nova Categoria">
+    <div class="p-grid">
+        <div class="p-col-2">Nome: </div>
+        <div class="p-col-10">
+            <input pInputText type="text" [(ngModel)]="categoria.nome">
+        </div>
+
+
+        <div class="p-col-2">Descrição: </div>
+        <div class="p-col-10">
+            <input pInputText type="text" [(ngModel)]="categoria.descricao">
+        </div>
+
+
+        <div class="p-col-10 p-offset-2">
+            <button pButton type="submit" label="Adicionar" (click)="adicionar()"></button>
+        </div>
+
+    </div>
+</p-panel>
+<BR>
+<p-table [value]="categorias">
+
+    <ng-template pTemplate="header">
+        <tr>
+            <th class="p-col-1"> ID </th>
+            <th class="p-col-4"> NOME </th>
+            <th class="p-col-6"> DESCRIÇÃO </th>
+            <th class="p-col-1"> AÇÕES </th>
+        </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-categoria>
+        <tr>
+            <td class="p-col-1">{{ categoria.id }}</td>
+            <td class="p-col-4">{{ categoria.nome }}</td>
+            <td class="p-col-6">{{ categoria.descricao }}</td>
+            <td class="p-col-1" style="text-align: center;">
+
+                <button class="ui-button-info ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only"
+                    icon="pi pi-search" pbutton="" style="margin-right: .8em">
+                    <span class="ui-button-icon-left ui-clickable pi pi-search" aria-hidden="true"></span>
+                    <span class="ui-button-text ui-clickable">ui-btn</span>
+                </button>
+
+                <button class="ui-button-success ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only"
+                    icon="pi pi-search" pbutton="" style="margin-right: .8em" (click)="editar(categoria.id)">
+                    <span class="ui-button-icon-left ui-clickable pi pi-pencil" aria-hidden="true"></span>
+                    <span class="ui-button-text ui-clickable">ui-btn</span>
+                </button>
+
+
+                <button class="ui-button-warning ui-button ui-widget ui-state-default ui-corner-all ui-button-icon-only"
+                    icon="pi pi-search" pbutton="" (click)="remover(categoria.id)">
+                    <span class="ui-button-icon-left ui-clickable pi pi-trash" aria-hidden="true"></span>
+                    <span class="ui-button-text ui-clickable">ui-btn</span>
+                </button>
+
+            </td>
+        </tr>
+
+    <p-dialog header="Godfather I" [(visible)]="modalEditar" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000"
+    [draggable]="false" [resizable]="false">
+   
+        <div class="p-grid">
+
+            <div class="p-col-2">ID: </div>
+            <div class="p-col-10">
+                <input pInputText type="text" [(value)]="categoria.id">
+            </div>
+
+            <div class="p-col-2">Nome: </div>
+            <div class="p-col-10">
+                <input pInputText type="text" [(value)]="categoria.nome">
+            </div>
+    
+            <div class="p-col-2">Descrição: </div>
+            <div class="p-col-10">
+                <input pInputText type="text" [(value)]="categoria.descricao" >
+            </div>
+
+        </div>
+  
+        
+        <p-footer>
+            <button type="button" pButton icon="pi pi-check" (click)="alterar(categoria)" label="EDITAR"></button>
+            <button type="button" pButton icon="pi pi-times" (click)="limparCategoriaEditar(categoria)" label="CANCELAR" class="ui-button-secondary"></button>
+        </p-footer>
+    </p-dialog>
+
+
+    </ng-template>
+
+</p-table>
+
+<p-toast></p-toast>
+
